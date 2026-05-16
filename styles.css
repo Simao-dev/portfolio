@@ -1,0 +1,91 @@
+
+/*.albert-sans-<uniquifier> {
+  font-family: "Albert Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+*/
+
+:root {
+    --cor-fonts-menu:#475467 ;
+    --font-principal: ;
+}
+
+body{
+    background: linear-gradient(to right, #E9EDF4, #D3DCEA);
+    margin: 50px 50px 0px 50px;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.container-logo{
+    display: flex;
+}
+
+.container-logo p{
+    font-family: "Albert Sans", sans-serif;
+    font-weight: bold;
+    font-size: 25px
+}
+.nome p{
+    color: #000000;
+}
+
+.sufixo {
+    color: #667085;
+}
+
+ul {
+    background-color: #ffffff;
+    align-items: center;
+    height: 60px;
+    width: 450px;
+    padding: 0;
+    border-radius: 50px;
+   
+}
+.container-contato{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 180px;
+    height: 60px;
+    border-radius: 50px;
+    background: #000000;
+    box-shadow: 0 4px 12px rgb(187, 187, 187);
+}
+
+.container-contato img{
+    width: 35px;
+    height: 35px;
+
+}
+.button-contato{
+    color: #ffffff;
+   
+}
+nav a{
+    text-decoration: none;
+    font-family: "Albert Sans", sans-serif;
+    font-weight: bold;
+    color: var(--cor-fonts-menu);  
+    font-size: 20px;
+}
+
+.menu{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    justify-content: space-evenly;
+    gap: 50px;
+    box-shadow: 0 4px 12px rgb(187, 187, 187);
+   
+
+}
