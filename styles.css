@@ -9,7 +9,7 @@
 
 :root {
     --cor-fonts-menu:#475467 ;
-    --font-principal: ;
+    --font-principal:"Albert Sans", sans-serif; ;
 }
 
 body{
@@ -29,7 +29,7 @@ nav{
 }
 
 .container-logo p{
-    font-family: "Albert Sans", sans-serif;
+    font-family: var(--font-principal);
     font-weight: bold;
     font-size: 25px
 }
@@ -73,7 +73,7 @@ ul {
 }
 nav a{
     text-decoration: none;
-    font-family: "Albert Sans", sans-serif;
+    font-family:var(--font-principal);
     font-weight: bold;
     color: var(--cor-fonts-menu);  
     font-size: 20px;
@@ -88,4 +88,86 @@ nav a{
     box-shadow: 0 4px 12px rgb(187, 187, 187);
    
 
+}
+
+main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: var(--font-principal);
+
+
+}
+
+.container_imagem{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 30vh;
+}
+
+.imagem_perfil{
+    width: 300px;
+    height: 300px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagem_perfil img{
+    width: 95%;
+    height: 95%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.Conteiner_informa{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+.container_nome{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    
+
+}
+.Conteiner_informa p {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+    border-radius: 50px;
+    background-color: #ffffff;
+}
+
+main h2{
+    margin: auto;
+    font-weight: 900;
+    font-size: 50px;
+}
+
+.informa_texto{
+    display:flex ;
+    gap: 10px;
+}
+
+.container_sobre{
+    text-align: center;
+    width: 200px;
+    height: 200px
+}
+
+main a{
+    text-decoration: none;
+    font-family:var(--font-principal);
+    font-weight: bold;
+    color: var(--cor-fonts-menu);  
+    font-size: 20px;
 }
