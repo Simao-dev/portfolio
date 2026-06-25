@@ -1,0 +1,183 @@
+:root {
+    --bg-principal: #09090b;      /* Preto profundo de fundo do site */
+    --bg-cards: #14141b;          /* Cinza escuro azulado para os cards e inputs */
+    --bg-inputs: #1d1d26;         /* Variação ligeiramente mais clara para campos */
+
+    
+    --cor-neon: #00ffaa;          /* Verde/Cyan neon (usado nos títulos e botões) */
+    --cor-neon-hover: #00cc88;    /* Tom mais escuro para o efeito de passar o mouse */
+
+    
+    --texto-branco: #ffffff;      /* Títulos principais e destaque */
+    --texto-cinza: #94a3b8;       /* Parágrafos, textos secundários e datas */
+    --texto-opaco: #4b5563;       /* Textos de menor relevância ou bordas */
+}
+
+body{
+    background-color: var(--bg-principal);
+}
+header{
+    width: 100%;
+}
+
+.header-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 40px;
+}
+header button{
+    font-family: JetBrains Mono;
+    color: var(--texto-opaco);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+}
+.logo {
+    color: var(--texto-opaco) ;
+    font-family: JetBrains Mono;
+    font-size: 16px;
+}
+i {
+    color: var(--cor-neon);
+    margin-right: 10px;
+}
+
+.disponivel{
+    font-family: JetBrains Mono;
+    font-size: 12px;
+}
+
+.section-1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    gap: 40px;
+}
+
+.main-section{
+    display: flex;
+    flex-direction: column;
+    max-width: 65%;
+}
+
+.foto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 35%;
+}
+
+.foto img{
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    object-fit: contain;
+}
+.extras{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    color: var(--cor-neon);
+    font-family: JetBrains Mono;
+}
+
+.ponto{
+    background-color: var(--cor-neon);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+
+}
+
+.nome{
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+
+.pedro {
+    font-family: "Barlow Condensed", monospace;
+    font-weight: 800;
+    font-size: 128px;
+    margin: 0;
+    color: var(--texto-branco);
+    letter-spacing: -3px;
+    line-height: 0.85;
+}
+.simao{
+    font-size: 128px;
+    color: var(--cor-neon);
+    font-family: "Barlow Condensed", monospace;
+    font-weight: 800;
+    font-size: 128px;
+    margin: 0;
+    letter-spacing: -3px;
+    line-height: 0.85;
+}
+
+.sub-titulo1{
+    font-family: JetBrains Mono;
+    color: var(--texto-opaco);
+    background-color: transparent;
+    font-size: 12px;
+}
+
+.sub-titulo2{
+    font-family: "inter", regular;
+    color: var(--texto-opaco);
+    font-size: 18px;
+    width: 500px;
+}
+
+.destaque{
+    color: var(--texto-branco);
+}
+
+.section-btn{
+    display: flex;
+    flex-direction: column;
+    
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 10px;
+}
+
+.buttons-sec-btn button{
+    width: 200px;
+    height: 50px;
+    margin: 0 10px 0 0;
+}
+.button1{
+    background-color: var(--cor-neon);
+    border: none;
+    cursor: pointer;
+    color: var(--bg-principal);
+    font-family:JetBrains Mono;
+}
+
+.button2{
+    font-family:JetBrains Mono;
+    color: var(--texto-opaco);
+    background-color:var(--bg-principal);
+    border: 1px solid rgba(255, 255, 255, 0.178);
+    cursor: pointer;
+}
+
+.redes i{
+    color: var(--texto-opaco);
+    cursor: pointer;
+}
