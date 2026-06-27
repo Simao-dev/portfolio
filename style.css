@@ -780,13 +780,19 @@ body[data-theme="light"] .ver-todos-arrow {
     box-shadow: 0 10px 30px var(--sombra-card);
 }
 
-.projeto-preview img {
+.projeto-preview {
     height: 100%;
     width: 100%;
     position: relative;
     background-size: cover;
     background-position: center;
     transition: var(--transition);
+}
+
+.projeto-preview img {
+    height: 100%;
+    width: 100%;
+
 }
 
 .preview-financeai {
