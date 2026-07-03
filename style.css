@@ -131,6 +131,15 @@ header {
     font-weight: 800;
 }
 
+#chevron-icon{
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.escondido {
+    opacity: 0;
+}
+
 nav {
     display: flex;
     gap: 30px;
@@ -196,6 +205,7 @@ nav a:hover::after {
     gap: 40px;
     min-height: 85vh;
 }
+
 
 .main-section {
     display: flex;
