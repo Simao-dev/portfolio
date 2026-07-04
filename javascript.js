@@ -48,3 +48,44 @@ setInterval(function() {
     const arrow = document.getElementsByTagName("i")[0];
     arrow.classList.toggle("escondido");
 },1000);
+
+
+
+//função responsável por fazer o carrossel de imagens do projeto 1
+
+let slideIndex = 0;
+
+function mudarSlide(direcao) {
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    // Atualiza o índice do slide ativo tratando os limites do carrossel
+    slideIndex += direcao;
+    if (slideIndex >= totalSlides) slideIndex = 0;
+    if (slideIndex < 0) slideIndex = totalSlides - 1;
+
+    // Remove as classes antigas de todos os slides
+    slides.forEach(slide => {
+        slide.className = 'slide';
+    });
+
+    // Adiciona a classe 'ativo' no slide central
+    slides[slideIndex].classList.add('ativo');
+
+    // Define quem é o slide anterior (à esquerda)
+    const indexEsquerda = (slideIndex - 1 + totalSlides) % totalSlides;
+    slides[indexEsquerda].classList.add('esquerda');
+
+    // Define quem é o slide posterior (à direita)
+    const indexDireita = (slideIndex + 1) % totalSlides;
+    slides[indexDireita].classList.add('direita');
+}
+
+// Inicializa o carrossel aplicando as posições corretas logo no carregamento da página
+document.addEventListener("DOMContentLoaded", () => {
+    mudarSlide(0); 
+});
+
+/*setInterval(() => {
+    mudarSlide(1);
+}, 4000); */

@@ -213,6 +213,13 @@ nav a:hover::after {
     max-width: 60%;
 }
 
+.section-projeto{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
 .extras {
     display: flex;
     align-items: center;
@@ -278,7 +285,26 @@ nav a:hover::after {
     text-shadow: 0 0 30px rgba(var(--cor-neon-rgb), 0.1);
 }
 
+.titulo-projeto{
+    color: var(--texto-branco);
+    font-family: var(--font-titulo);
+    font-weight: 800;
+    font-size: 70px;
+    margin: 0;
+    line-height: 0.85;
+}
 .sub-titulo1 {
+    font-family: var(--font-mono);
+    color: var(--texto-opaco);
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+.sub-titulo-projeto {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
     font-family: var(--font-mono);
     color: var(--texto-opaco);
     font-size: 12px;
@@ -1263,13 +1289,109 @@ footer {
     font-size: 14px;
 }
 
+/* style carrosel */
 
-/* Telas de Computadores Pequenos e Tablets Paisagem */
+.carrossel-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px; 
+    margin: 0 auto;
+    padding: 40px 0;
+    perspective: 1000px; 
+}
+
+.imagem-projeto {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-height: 500px;     
+    width: 100%;
+    transform-style: preserve-3d;
+}
+
+.slide {
+    display: block;
+    position: absolute;
+    width: 250px;          
+    height: auto;         
+    background-color: var(--bg-cards);
+    border-radius: 12px;
+    padding: 16px;         
+    transition: all 0.5s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    box-sizing: border-box; 
+}
+
+
+/* Slide do Centro (Ativo) */
+.slide.ativo {
+    opacity: 1;
+    transform: translate3d(0, 0, 100px) scale(1);
+    z-index: 3;
+    pointer-events: auto;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+/* Slide da Esquerda */
+.slide.esquerda {
+    opacity: 0.6;
+    transform: translate3d(-160px, 0, 0) rotateY(25deg) scale(0.85);
+    z-index: 1;
+}
+
+/* Slide da Direita */
+.slide.direita {
+    opacity: 0.6;
+    transform: translate3d(160px, 0, 0) rotateY(-25deg) scale(0.85);
+    z-index: 1;
+}
+
+.imagem-projeto img {
+    height: auto;          
+    object-fit: contain;   
+    border-radius: 8px;   
+}
+
+
+.carrossel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: var(--cor-neon); 
+    border: 1px solid var(--cor-neon);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.carrossel-button:hover {
+    background-color: var(--cor-neon);
+    color: #000;
+}
+
+
+button:first-of-type { left: -20px; }
+button:last-of-type { right: -20px; }
+
 @media (max-width: 1024px) {
 
     .pedro,
     .simao {
         font-size: 90px;
+    }
+    .titulo-projeto{
+        font-size: 50px;
     }
 
     .section-3 {
@@ -1335,6 +1457,9 @@ footer {
     .pedro,
     .simao {
         font-size: 72px;
+    }
+    .titulo-projeto{
+        font-size: 30px;
     }
 
     .section-btn {
@@ -1444,6 +1569,9 @@ footer {
     .pedro,
     .simao {
         font-size: 54px;
+    }
+    .titulo-projeto{
+        font-size: 18px;
     }
 
     .sub-titulo2 {
