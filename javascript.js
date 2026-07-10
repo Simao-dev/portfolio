@@ -59,33 +59,39 @@ function mudarSlide(direcao) {
     const slides = document.querySelectorAll('.slide');
     const totalSlides = slides.length;
 
-    // Atualiza o índice do slide ativo tratando os limites do carrossel
+    // Atualiza o índice tratando os limites
     slideIndex += direcao;
     if (slideIndex >= totalSlides) slideIndex = 0;
     if (slideIndex < 0) slideIndex = totalSlides - 1;
 
-    // Remove as classes antigas de todos os slides
+    // Limpa todas as classes de posição antes de aplicar as novas
     slides.forEach(slide => {
         slide.className = 'slide';
     });
 
-    // Adiciona a classe 'ativo' no slide central
+    // 1. CARD CENTRAL (ATIVO)
     slides[slideIndex].classList.add('ativo');
 
-    // Define quem é o slide anterior (à esquerda)
+    // 2. PRIMEIROS VIZINHOS (Imediatamente ao lado)
     const indexEsquerda = (slideIndex - 1 + totalSlides) % totalSlides;
     slides[indexEsquerda].classList.add('esquerda');
 
-    // Define quem é o slide posterior (à direita)
     const indexDireita = (slideIndex + 1) % totalSlides;
     slides[indexDireita].classList.add('direita');
+
+    // 3. SEGUNDOS VIZINHOS (Mais afastados nas pontas)
+    const indexEsquerda2 = (slideIndex - 2 + totalSlides) % totalSlides;
+    slides[indexEsquerda2].classList.add('esquerda-distante');
+
+    const indexDireita2 = (slideIndex + 2) % totalSlides;
+    slides[indexDireita2].classList.add('direita-distante');
 }
 
-// Inicializa o carrossel aplicando as posições corretas logo no carregamento da página
+// Inicializa o carrossel
 document.addEventListener("DOMContentLoaded", () => {
     mudarSlide(0); 
 });
 
-/*setInterval(() => {
+setInterval(() => {
     mudarSlide(1);
-}, 4000); */
+}, 4000); 
