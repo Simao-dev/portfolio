@@ -1304,10 +1304,10 @@ footer {
 
 .imagem-projeto {
     display: flex; 
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    min-height: 500px;     
+    justify-content: center; 
+    align-items: center; 
+    position: relative; 
+    min-height: 480px; 
     width: 100%;
     transform-style: preserve-3d;
 }
@@ -1317,14 +1317,28 @@ footer {
     position: absolute;
     width: 200px;          
     height: auto;         
-    background-color:#111116;
-    border-radius: 12px;
-    padding: 16px;         
-    transition: all 0.5s ease-in-out;
-    opacity: 0;
-    pointer-events: none;
-    z-index: 0;
-    box-sizing: border-box; 
+    background-color: #111116; 
+    border-radius: 12px;   
+    padding: 10px;         
+    transition: all 0.5s ease-in-out; 
+    opacity: 0;           
+    pointer-events: none;  
+    z-index: 0;            
+    box-sizing: border-box;
+    object-fit: contain;
+}
+
+
+.slide.horizontal {
+    width: 90% !important;
+    max-width: 700px !important; 
+}
+
+
+.slide img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
 

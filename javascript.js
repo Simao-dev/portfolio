@@ -59,27 +59,33 @@ function mudarSlide(direcao) {
     const slides = document.querySelectorAll('.slide');
     const totalSlides = slides.length;
 
+    if (totalSlides === 0) return;
+
     // Atualiza o índice tratando os limites
     slideIndex += direcao;
     if (slideIndex >= totalSlides) slideIndex = 0;
     if (slideIndex < 0) slideIndex = totalSlides - 1;
 
-    // Limpa todas as classes de posição antes de aplicar as novas
+    //Mantém a classe 'horizontal' se ela existir!
     slides.forEach(slide => {
+        const ehHorizontal = slide.classList.contains('horizontal');
         slide.className = 'slide';
+        if (ehHorizontal) {
+            slide.classList.add('horizontal');
+        }
     });
 
-    // 1. CARD CENTRAL (ATIVO)
+    // 1. CARD CENTRAL 
     slides[slideIndex].classList.add('ativo');
 
-    // 2. PRIMEIROS VIZINHOS (Imediatamente ao lado)
+    // 2. PRIMEIROS VIZINHOS 
     const indexEsquerda = (slideIndex - 1 + totalSlides) % totalSlides;
     slides[indexEsquerda].classList.add('esquerda');
 
     const indexDireita = (slideIndex + 1) % totalSlides;
     slides[indexDireita].classList.add('direita');
 
-    // 3. SEGUNDOS VIZINHOS (Mais afastados nas pontas)
+    // 3. SEGUNDOS VIZINHOS 
     const indexEsquerda2 = (slideIndex - 2 + totalSlides) % totalSlides;
     slides[indexEsquerda2].classList.add('esquerda-distante');
 
@@ -87,11 +93,37 @@ function mudarSlide(direcao) {
     slides[indexDireita2].classList.add('direita-distante');
 }
 
-// Inicializa o carrossel
-document.addEventListener("DOMContentLoaded", () => {
-    mudarSlide(0); 
-});
 
 setInterval(() => {
     mudarSlide(1);
 }, 4000); 
+
+// DETECTOR AUTOMÁTICO DE FORMATO (VERTICAL / HORIZONTAL)
+function ajustarFormatosDosCards() {
+    const slides = document.querySelectorAll('.slide');
+
+    slides.forEach(slide => {
+        if (slide.tagName === 'IMG') {
+            const verificarDimensoes = () => {
+                if (slide.naturalWidth > slide.naturalHeight) {
+                    slide.classList.add('horizontal');
+                }
+            };
+
+            if (slide.complete) {
+                verificarDimensoes();
+            } else {
+                slide.addEventListener('load', verificarDimensoes);
+            }
+        }
+    });
+}
+
+// INICIALIZADOR UNIFICADO
+document.addEventListener("DOMContentLoaded", () => {
+    ajustarFormatosDosCards(); 
+    mudarSlide(0);             
+});
+
+
+
