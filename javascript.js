@@ -126,4 +126,46 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+//módulo responsavel por renderizar os cards de projetos
 
+import { projetos } from './projectsData.js';
+
+function renderizarProjetos() {
+
+    const container =  document.getElementById('projetos-grid');
+    let HTMLcontent = '';
+     
+    
+    if(projetos && projetos.length > 0){
+
+        projetos.forEach(projeto =>{
+
+            HTMLcontent += `
+            <div class="projeto-card">
+                <div class="projeto-preview preview-financeai">
+                    <img src=${projeto.imgPreview} alt=${projeto.nome} class="projeto-overlay-icon">
+                    <div class="projeto-overlay">
+                    </div>
+                </div>
+                <div class="projeto-info">
+                    <div class="projeto-titulo-linha">
+                        <h3>${projeto.nome}</h3>
+                        <a href=${projeto.link} class="projeto-link-icon" aria-label="Acessar ${projeto.nome}"><i class="bi bi-arrow-right-circle"></i></a>
+                    </div>
+                    <p>${projeto.descricao}</p>
+                    <div class="projeto-tags">
+                        ${projeto.tags.map(tag => `<span>${tag}</span>`).join('')}
+                    </div>
+                </div>
+            </div>
+        `;
+             
+        container.innerHTML = HTMLcontent;  
+    });
+
+     }else{
+        container.innerHTML = `<p>Novos projeto em breve!.</p>`;
+    }
+}
+
+renderizarProjetos();
