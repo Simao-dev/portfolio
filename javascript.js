@@ -141,7 +141,7 @@ function renderizarProjetos() {
         projetos.forEach(projeto =>{
 
             HTMLcontent += `
-            <div class="projeto-card">
+            <div class="projeto-card" onclick="window.location.href='./projeto.html?id=${projeto.id}'">
                 <div class="projeto-preview preview-financeai">
                     <img src=${projeto.imgPreview} alt=${projeto.nome} class="projeto-overlay-icon">
                     <div class="projeto-overlay">
@@ -169,3 +169,98 @@ function renderizarProjetos() {
 }
 
 renderizarProjetos();
+
+//CRIA PAGINA GENERICA DE PROJETO QUE MUDA DE ACORDO COM O ID PASSADO NA URL
+/*
+
+import { projetos } from './carroselData.js';
+
+function montaPaginaProjeto() {
+    const container = document.getElementById('inicio');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    const projetoId = urlParams.get('id');
+
+    const projetoidlink = detalhesProjeto.find(projeto => projeto.id === parseInt(projetoId));
+
+   if (projetoidlink) {
+        HTMLcontent = `
+         <div class="section-projeto">
+                <div class="extras">
+                    <div class="ponto"></div>
+                    <p class="disponivel"> Concluído.</p>
+                </div>
+                <div class="nome">
+                    <h1 class="titulo-projeto" id="nome_projeto">
+                        ${projetoidlink.nome}
+                    </h1>
+                </div>
+                <div class="sub-titulo-projeto">
+                    <p class="texto-cinza" id="descricao_projeto">
+                        ${projetoidlink.descricao}
+                    </p>
+                    <a id ="Link_GitHub"href="${projetoidlink.link}" target="_blank"><button class="button2">GitHub</button></a>
+                    <a id="Link_Saiba_Mais"href="${projetoidlink.linkoProjeto}" target="_blank"><button class="button1">Saiba mais</button></a>
+                </div>
+                <div class="carrossel-container">
+                    <div class="imagem-projeto" id="carrossel">
+
+                    </div>
+                    <button class="carrossel-button" onclick="mudarSlide(-1)" >&#10094;</button>
+                    <button class="carrossel-button" onclick="mudarSlide(1)" >&#10095;</button>
+                </div>
+            </div>
+
+            <div class="section-informacoes">
+                <div class="container-Informacoes">
+                    <div class="Informacoes">
+                         <p class="section-subtitle"><span class="span-verde">// 01 </span> VISÃO GERAL</p>
+                        <div class="texto-sobre">
+                            <p class="texto-cinza" id="visao_geral_projeto">
+                                
+                            </p>
+                        </div>
+                    </div>
+                    <div class="funcionalidades">
+                        <p class="section-subtitle"><span class="span-verde">// 02 </span> FUNCIONALIDADES</p>
+                        <ul class="lista-tecnologias" id="funcionalidades_projeto">
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="section-tecnologias">
+                    <div class="container-detalhes">
+                        <p class="section-subtitle"> DETALHES</p>
+                        <div class="detalhes-funcao">
+                            <p class="detalhe-titulo">FUNÇÃO</p>
+                            <P class="detalhe-conteudo">Desenvolverdor full-stack</P>
+                        </div>
+                        <div class="detalhes-funcao">
+                            <p class="detalhe-titulo">ANO</p>
+                            <P class="detalhe-conteudo" id="ano_projeto">
+
+                            </P>
+                        </div>
+                            <div class="detalhes-funcao">
+                            <p class="detalhe-titulo">STATUS</p>
+                            <P class="detalhe-conteudo" id="status_projeto">
+
+                            </P>
+                        </div>
+                    </div>
+                    <div class="container-detalhes">
+                        <p class="section-subtitle"> TECNOLOGIAS</p>
+                        <div class="detalhes-funcao">
+                           <ul class="lista-linguagens" id="tecnologias_projeto">
+                              
+                           </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+    }else{
+
+    
+}}*/
