@@ -1,9 +1,9 @@
-export const carroselData =[
+export const paginaData =[
     {
         "id": 1,
         "Nome": "Treino.app",
         "Descricao": "Aplicativo de treino focado para o personal trainer e o aluno mais avançado,onde é possivel criar treinos personalizados e fazer acompanhamento.",
-        "link": "https://github.com/Simao-dev/treino.app",
+        "link": "https://github.com/Simao-dev/treino.app/blob/master/README.md",
         "linkoProjeto": "https://github.com/Simao-dev/treino.app",
         "galeriaCarrossel": [
             "assets/img_projetos/treino/Criar treino.png",
@@ -31,9 +31,83 @@ export const carroselData =[
     },
     {
         "id": 2,
+        "Nome": "Portal interno de chamados",
+        "Descricao": "Um ecossistema robusto e responsivo desenvolvido para gerenciamento, monitoramento e automação de chamados técnicos. O sistema possui dois níveis de acesso (Administrador e Portal do Cliente), painel de métricas em tempo real e um motor de disparo automático para tarefas de rotina estruturadas.",
+        "link": "https://github.com/Simao-dev/portal-de-chamados/blob/main/README.md",
+        "linkoProjeto": "https://github.com/Simao-dev/portal-de-chamados",
+        "galeriaCarrossel": [
+            "assets/img_projetos/portalChamados/1.png",
+            "assets/img_projetos/portalChamados/2.png",
+            "assets/img_projetos/portalChamados/3.png",
+            "assets/img_projetos/portalChamados/4.png",
+            "assets/img_projetos/portalChamados/5.png"
+        ],
+        "descricaoCarrossel": "Portal do Cliente: Área restrita para usuários comuns abrirem solicitações de requisição e acompanharem o histórico de seus chamados em tempo real de forma isolada. Atendimento Administrativo: Interface para triagem de chamados,alteração de status e registro de atendimentos (como solicitações recebidas via telefone).Painel de Métricas Dinâmico: Gráficos de progresso em anel (progress-ring) integrados à biblioteca Flatpickr para análise de volumetria por intervalo de datas personalizado. Motor de Rotinas Automáticas: Agendamento de tarefas diárias ou mensais que geram chamados automaticamente na planilha principal baseados na sessão do usuário responsável. Responsividade Ultra-Rígida: Layout adaptável otimizado tanto para desktops quanto para dispositivos móveis (visual slim compacto estilo Android).",
+        "funcionalidadesCarrossel": [
+            "Validação de Credenciais",
+            "Controle Dinâmico de Sessão",
+            "Restrição Automática de Escopo",
+            "Abertura de Requisições",
+            "Histórico Filtrado e Isolado",
+            "Triagem de Ocorrências",
+            "Lista Relacional Dinâmica",
+            "Atualização Rápida por Clique",
+            "Busca Direta no Banco",
+            "Destravamento Ativo para Edição",
+            "Filtro de Período Cronológico",
+            "Cálculo Estatístico Automatizado",
+            "Controle de Colaboradores",
+            "Campos Condicionais Dinâmicos",
+            "Remoção de Contas",
+            "Programação de Gatilhos",
+            "Badges em Tempo Real"
+        ],
+
+        "ano": 2024,
+        "status": "Em desenvolvimento",
+        "tecnologias": [
+            "JavaScript", 
+            "HTML5", 
+            "CSS3", 
+            "Google apps script"
+        ]     
+    },
+    {
+        "id": 3,
+        "Nome": "SISTEMA DE CONTROLE DE FARDAMENTOS",
+        "Descricao": "Este projeto é um sistema de controle de estoque e movimentação de ativos desenvolvido em Google Apps Script. O objetivo é digitalizar o registro de entradas e saídas, eliminando o uso de papel e agilizando a consulta de informações para colaboradores e gestores.",
+        "link": "https://github.com/Simao-dev/gerenciador-de-ativos/blob/main/README.md",
+        "linkoProjeto": "https://github.com/Simao-dev/gerenciador-de-ativos",
+        "galeriaCarrossel": [
+            "assets/img_projetos/ativos/1.png",
+            "assets/img_projetos/ativos/2.png",
+            "assets/img_projetos/ativos/3.png",
+            "assets/img_projetos/ativos/4.png",
+            "assets/img_projetos/ativos/5.png"
+        ],
+        "descricaoCarrossel": " O Gerenciador de Ativos é um sistema web customizado para controle de estoque e movimentação de ferramentas, EPIs (Equipamentos de Proteção Individual) e fardamentos. Desenvolvido para rodar totalmente na nuvem dentro do ecossistema Google, o projeto elimina o uso de formulários em papel, agiliza a consulta de informações para gestores e automatiza o fluxo de entrega e devolução de materiais.O grande diferencial técnico é a arquitetura Serverless utilizando o Google Workspace, transformando o Google Planilhas em um banco de dados relacional e o Google Apps Script em uma potente API de Backend.",
+        "funcionalidadesCarrossel": [
+            "Dashboard em Tempo Real",
+            "Fluxo Inteligente de Retiradas",
+            "Módulo de Higienização de EPIs",
+            "Gestão de Colaboradores",
+            "Relatórios Automatizados"
+        ],
+
+        "ano": 2024,
+        "status": "Concluído",
+        "tecnologias": [
+            "JavaScript", 
+            "HTML5", 
+            "CSS3", 
+            "Google apps script"
+        ]  
+    },
+    {
+        "id": 4,
         "Nome": "Captura de seleção",
         "Descricao": "Extensão de Captura e geração de QR Code, Solução robusta construída sob a arquitetura moderna do Manifest V3, focada em produtividade e automação. O projeto resolve o desafio de processamento de imagem local integrado ao navegador, utilizando content scripts para manipulação dinâmica do DOM e service workers para o gerenciamento de eventos em segundo plano.",
-        "link": "https://github.com/Simao-dev/Extensao",
+        "link": "https://github.com/Simao-dev/Extensao/blob/main/README.md",
         "linkoProjeto": "https://chromewebstore.google.com/detail/impress%C3%A3o-de-sele%C3%A7%C3%A3o/mjjoaclebojlgiakglfpnnpjlcpndghe?hl=pt-br",
         "galeriaCarrossel": [
             "assets/img_projetos/extensao/1.png",
@@ -74,79 +148,5 @@ export const carroselData =[
             "Bibliotecas de QR Code",
             "Web Storage API"
         ]     
-    },
-    {
-        "id": 3,
-        "Nome": "Portal interno de chamados",
-        "Descricao": "Um ecossistema robusto e responsivo desenvolvido para gerenciamento, monitoramento e automação de chamados técnicos. O sistema possui dois níveis de acesso (Administrador e Portal do Cliente), painel de métricas em tempo real e um motor de disparo automático para tarefas de rotina estruturadas.",
-        "link": "https://github.com/Simao-dev/portal-de-chamados",
-        "linkoProjeto": "https://github.com/Simao-dev/portal-de-chamados",
-        "galeriaCarrossel": [
-            "assets/img_projetos/portalChamados/1.png",
-            "assets/img_projetos/portalChamados/2.png",
-            "assets/img_projetos/portalChamados/3.png",
-            "assets/img_projetos/portalChamados/4.png",
-            "assets/img_projetos/portalChamados/5.png"
-        ],
-        "descricaoCarrossel": "Portal do Cliente: Área restrita para usuários comuns abrirem solicitações de requisição e acompanharem o histórico de seus chamados em tempo real de forma isolada. Atendimento Administrativo: Interface para triagem de chamados,alteração de status e registro de atendimentos (como solicitações recebidas via telefone).Painel de Métricas Dinâmico: Gráficos de progresso em anel (progress-ring) integrados à biblioteca Flatpickr para análise de volumetria por intervalo de datas personalizado. Motor de Rotinas Automáticas: Agendamento de tarefas diárias ou mensais que geram chamados automaticamente na planilha principal baseados na sessão do usuário responsável. Responsividade Ultra-Rígida: Layout adaptável otimizado tanto para desktops quanto para dispositivos móveis (visual slim compacto estilo Android).",
-        "funcionalidadesCarrossel": [
-            "Validação de Credenciais",
-            "Controle Dinâmico de Sessão",
-            "Restrição Automática de Escopo",
-            "Abertura de Requisições",
-            "Histórico Filtrado e Isolado",
-            "Triagem de Ocorrências",
-            "Lista Relacional Dinâmica",
-            "Atualização Rápida por Clique",
-            "Busca Direta no Banco",
-            "Destravamento Ativo para Edição",
-            "Filtro de Período Cronológico",
-            "Cálculo Estatístico Automatizado",
-            "Controle de Colaboradores",
-            "Campos Condicionais Dinâmicos",
-            "Remoção de Contas",
-            "Programação de Gatilhos",
-            "Badges em Tempo Real"
-        ],
-
-        "ano": 2024,
-        "status": "Em desenvolvimento",
-        "tecnologias": [
-            "JavaScript", 
-            "HTML5", 
-            "CSS3", 
-            "Google apps script"
-        ]     
-    },
-    {
-        "id": 4,
-        "Nome": "SISTEMA DE CONTROLE DE FARDAMENTOS",
-        "Descricao": "Este projeto é um sistema de controle de estoque e movimentação de ativos desenvolvido em Google Apps Script. O objetivo é digitalizar o registro de entradas e saídas, eliminando o uso de papel e agilizando a consulta de informações para colaboradores e gestores.",
-        "link": "https://github.com/Simao-dev/gerenciador-de-ativos",
-        "linkoProjeto": "https://github.com/Simao-dev/gerenciador-de-ativos",
-        "galeriaCarrossel": [
-            "assets/img_projetos/ativos/1.png",
-            "assets/img_projetos/ativos/2.png",
-            "assets/img_projetos/ativos/3.png",
-            "assets/img_projetos/ativos/4.png",
-            "assets/img_projetos/ativos/5.png"
-        ],
-        "descricaoCarrossel": " O Gerenciador de Ativos é um sistema web customizado para controle de estoque e movimentação de ferramentas, EPIs (Equipamentos de Proteção Individual) e fardamentos. Desenvolvido para rodar totalmente na nuvem dentro do ecossistema Google, o projeto elimina o uso de formulários em papel, agiliza a consulta de informações para gestores e automatiza o fluxo de entrega e devolução de materiais.O grande diferencial técnico é a arquitetura Serverless utilizando o Google Workspace, transformando o Google Planilhas em um banco de dados relacional e o Google Apps Script em uma potente API de Backend.",
-        "funcionalidadesCarrossel": [
-            "Dashboard em Tempo Real",
-            "Fluxo Inteligente de Retiradas",
-            "Módulo de Higienização de EPIs",
-            "Gestão de Colaboradores",
-            "Relatórios Automatizados"
-        ],
-
-        "ano": 2024,
-        "status": "Concluído",
-        "tecnologias": [
-            "JavaScript", 
-            "HTML5", 
-            "CSS3", 
-            "Google apps script"
-        ]  
-    }   
+    },   
 ]
