@@ -139,13 +139,38 @@ function renderizarProjetos() {
     }
 }
 
-// --- RENDERIZAÇÃO DA PÁGINA DETALHADA DO PROJETO ---
+// PÁGINA NÃO ENCONTRADA
+
+function paginaNaoEcontrada (){
+    const container = document.getElementById('inicio');
+    const containerErro = document.getElementById('erro-container');
+
+    document.title =  'Projeto não encotrado | Simão.dev';
+
+    // Se o projeto existe, garante que o erro fica oculto e o projeto visível
+    if(container) container.classList.add('hidden');
+    if(containerErro) containerErro.classList.add('hidden');
+}
+
+
+
+// RENDERIZAÇÃO DE PÁGINAS DO PROJETO
 function renderizarPaginaProjetos(pagina) {
     const container = document.getElementById('inicio');
-    if (!container) return;
+    const containerErro = document.getElementById('erro-container');
 
+    // se a pagina não for econtrada exibe a página de erro
+    if (!pagina) {
+        paginaNaoEcontrada();
+    return;
+    }
+
+    // Se o projeto existe, garante que o erro fica oculto e o projeto visível
+    if(container) container.classList.add('hidden');
+    if(containerErro) containerErro.classList.add('hidden');
     document.title = `${pagina.Nome} - Simão.dev`;
 
+    // Mapeamento dos elementos da galeria, funcionalidades e tecnologias
     const galeriaHTML = pagina.galeriaCarrossel ? pagina.galeriaCarrossel.map(imgSrc => `
         <img class="slide" src="${imgSrc}" alt="Imagem do projeto ${pagina.Nome}">
     `).join('') : '';
@@ -231,30 +256,25 @@ function renderizarPaginaProjetos(pagina) {
     mudarSlide(0);
 }
 
-// --- INICIALIZAÇÃO CONTROLADA ---
+//INICIALIZAÇÃO CONTROLADA
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Caso esteja na página principal
+    // Executa a home
     if (document.getElementById('projetos-grid')) {
         renderizarProjetos();
     }
 
-    // 2. Caso esteja na página dinâmica de projetos
+    // Execulta pagina de projetos
     if (window.location.pathname.includes('projeto.html')) {
         const urlParams = new URLSearchParams(window.location.search);
         const projetoId = urlParams.get('id');
 
-        if (!projetoId) {
-            console.warn("Nenhum ID de projeto fornecido na URL.");
-            return;
-        }
 
-        const dadoProjeto = paginaData.find(p => p.id === parseInt(projetoId, 10));
-
-        if (!dadoProjeto) {
-            console.warn(`Projeto com o ID ${projetoId} não encontrado!`);
-            return;
-        }
-
+        //Se o projetoId for invalido ou "NaN" acionará o e rpagina 404
+       const idProjeto = parseInt(projetoId, 10);
+        const dadoProjeto = !isNaN(idProjeto)
+        ? paginaData.find(p => p.id === idProjeto)
+        : undefined;
+        
         renderizarPaginaProjetos(dadoProjeto);
     }
 });
