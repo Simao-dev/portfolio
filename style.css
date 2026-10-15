@@ -1458,6 +1458,15 @@ footer {
     color: var(--cor-neon);
 }
 
+/*Container erro*/
+.erro-container-filho{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+
 
 
 button:first-of-type { left: -20px; }

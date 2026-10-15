@@ -1,0 +1,21 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "criação de um novo portfolio para praticar as logicas aprendidas no curso até agora e poder divulgar os projetos já criados por min.\r vai ser usado tecnoligias basicas\r html - css - javaScrip - node.js",
+  "main": "carroselData.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Simao-dev/portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Simao-dev/portfolio/issues"
+  },
+  "homepage": "https://github.com/Simao-dev/portfolio#readme"
+}
