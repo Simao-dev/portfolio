@@ -1,5 +1,191 @@
-import { paginaData } from './carroselData.js';
-import { projetos } from './projectsData.js';
+import { buscarProjetos, buscarProjetosPorId } from "./projectService.js";
+
+
+document.addEventListener("DOMContentLoaded", async () =>{
+
+    const gridProjetos = document.getElementById("projetos-grid");
+
+    if(gridProjetos){
+
+        const projetos = await buscarProjetos();
+
+        renderizarProjetos(projetos);
+    }
+
+
+    if(window.location.pathname.includes("projeto.html")){
+        const urlParams = new URLSearchParams(window.location,search);
+        const projetoId = parentInt(urlParams.get("id"),10);
+
+        const dadosProjeto = !isNaN(projetoId)
+        ? await buscarProjetosPorId(projetoId)
+        : undefined;
+
+        renderizarPaginaProjetos(dadosProjeto);
+    }
+});
+
+
+// RENDERIZAÇÃO DE PÁGINAS DO PROJETO
+function renderizarPaginaProjetos(pagina) {
+    const container = document.getElementById('inicio');
+    const containerErro = document.getElementById('erro-container');
+
+    // se a pagina não for econtrada exibe a página de erro
+    if (!pagina) {
+        paginaNaoEcontrada();
+    return;
+    }
+
+    // Se o projeto existe, garante que o erro fica oculto e o projeto visível
+    if(container) container.classList.add('hidden');
+    if(containerErro) containerErro.classList.add('hidden');
+    document.title = `${pagina.Nome} - Simão.dev`;
+
+    // Mapeamento dos elementos da galeria, funcionalidades e tecnologias
+    const galeriaHTML = pagina.galeriaCarrossel ? pagina.galeriaCarrossel.map(imgSrc => `
+        <img class="slide" src="${imgSrc}" alt="Imagem do projeto ${pagina.Nome}">
+    `).join('') : '';
+
+    const funcionalidadesHTML = pagina.funcionalidadesCarrossel ? pagina.funcionalidadesCarrossel.map(func => `
+        <li><span class="span-verde"><i class="bi bi-check-circle"></i></span> ${func}</li>
+    `).join('') : '';
+
+    const tecnologiasHTML = pagina.tecnologias ? pagina.tecnologias.map(tech => `
+        <li class="detalhe-conteudo">${tech}</li>
+    `).join('') : '';
+
+    container.innerHTML = `
+        <div class="section-projeto">
+            <div class="extras">
+                <div class="ponto"></div>
+                <p class="disponivel">${pagina.status}</p>
+            </div>
+            <div class="nome">
+                <h1 class="titulo-projeto" id="nome_projeto">${pagina.Nome}</h1>
+            </div>
+            <div class="sub-titulo-projeto">
+                <p class="texto-cinza" id="descricao_projeto">${pagina.Descricao}</p>
+                <a id="Link_GitHub" href="${pagina.link}" target="_blank" rel="noopener noreferrer"><button class="button2">GitHub</button></a>
+                <a id="Link_Saiba_Mais" href="${pagina.linkoProjeto}" target="_blank" rel="noopener noreferrer"><button class="button1">Saiba mais</button></a>
+            </div>
+            <div class="carrossel-container">
+                <div class="imagem-projeto" id="carrossel">
+                    ${galeriaHTML}
+                </div>
+                <button class="carrossel-button" id="btn-prev" aria-label="Slide anterior">&#10094;</button>
+                <button class="carrossel-button" id="btn-next" aria-label="Próximo slide">&#10095;</button>
+            </div>
+        </div>
+        <div class="section-informacoes">
+            <div class="container-Informacoes">
+                <div class="Informacoes">
+                    <p class="section-subtitle"><span class="span-verde">// 01 </span> VISÃO GERAL</p>
+                    <div class="texto-sobre">
+                        <p class="texto-cinza" id="visao_geral_projeto">${pagina.descricaoCarrossel}</p>
+                    </div>
+                </div>
+                <div class="funcionalidades">
+                    <p class="section-subtitle"><span class="span-verde">// 02 </span> FUNCIONALIDADES</p>
+                    <ul class="lista-tecnologias" id="funcionalidades_projeto">
+                        ${funcionalidadesHTML}
+                    </ul>
+                </div>
+            </div>
+            <div class="section-tecnologias">
+                <div class="container-detalhes">
+                    <p class="section-subtitle">DETALHES</p>
+                    <div class="detalhes-funcao">
+                        <p class="detalhe-titulo">FUNÇÃO</p>
+                        <p class="detalhe-conteudo">Desenvolvedor Full-Stack</p>
+                    </div>
+                    <div class="detalhes-funcao">
+                        <p class="detalhe-titulo">ANO</p>
+                        <p class="detalhe-conteudo" id="ano_projeto">${pagina.ano}</p>
+                    </div>
+                    <div class="detalhes-funcao">
+                        <p class="detalhe-titulo">STATUS</p>
+                        <p class="detalhe-conteudo" id="status_projeto">${pagina.status}</p>
+                    </div>
+                </div>
+                <div class="container-detalhes">
+                    <p class="section-subtitle">TECNOLOGIAS</p>
+                    <div class="detalhes-funcao">
+                        <ul class="lista-linguagens" id="tecnologias_projeto">
+                            ${tecnologiasHTML}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Event Listeners para controle do Carrossel
+    document.getElementById('btn-prev')?.addEventListener('click', () => mudarSlide(-1));
+    document.getElementById('btn-next')?.addEventListener('click', () => mudarSlide(1));
+
+    ajustarFormatosDosCards();
+    mudarSlide(0);
+}
+
+// --- RENDERIZAÇÃO DA GRID DE PROJETOS (HOME) ---
+function renderizarProjetos(listaProjetos) {
+    const container = document.getElementById('projetos-grid');
+    if (!container) return;
+
+    if(!listaProjetos || listaProjetos.length ===0){
+        container.innerHTML = `<p>Nenhum projeto encontrado</p>`
+        return;
+    }
+
+    const htmlCards = listaProjetos.map(projeto =>{
+        const tags = Array.isArray(projeto.tags) ? projeto.tags : [];
+        return`
+        <div class="projeto-card" onclick="window.location.href='./projeto.html?id=${projeto.id}'">
+                <div class="projeto-preview preview-financeai">
+                    <img src="${projeto.imgPreview}" alt="${projeto.nome}" class="projeto-overlay-icon">
+                    <div class="projeto-overlay"></div>
+                </div>
+                <div class="projeto-info">
+                    <div class="projeto-titulo-linha">
+                        <h3>${projeto.nome}</h3>
+                        <a href="./projeto.html?id=${projeto.id}" class="projeto-link-icon" aria-label="Acessar ${projeto.nome}">
+                            <i class="bi bi-arrow-right-circle"></i>
+                        </a>
+                    </div>
+                    <p>${projeto.descricao}</p>
+                    <div class="projeto-tags">
+                        ${projeto.tags.map(tag => `<span>${tag}</span>`).join('')}
+                    </div>
+                </div>
+            </div>
+        `}).join("");
+
+    container.innerHTML = htmlCards;    
+}
+
+//INICIALIZAÇÃO CONTROLADA
+ document.addEventListener("DOMContentLoaded", () => {
+     // Executa a home
+     if (document.getElementById('projetos-grid')) {
+         renderizarProjetos();
+     }
+
+     // Execulta pagina de projetos
+     if (window.location.pathname.includes('projeto.html')) {
+         const urlParams = new URLSearchParams(window.location.search);
+         const projetoId = urlParams.get('id');
+
+
+         //Se o projetoId for invalido ou "NaN" acionará o e rpagina 404
+        const idProjeto = parseInt(projetoId, 10);
+         const dadoProjeto = !isNaN(idProjeto)
+         ? paginaData.find(p => p.id === idProjeto)
+         : undefined;
+        
+         renderizarPaginaProjetos(dadoProjeto);
+     }
+ });
 
 // --- GERENCIAMENTO DE TEMA (DARK/LIGHT) ---
 const themeToggle = document.getElementById('theme-toggle');
@@ -105,39 +291,7 @@ function ajustarFormatosDosCards() {
     });
 }
 
-// --- RENDERIZAÇÃO DA GRID DE PROJETOS (HOME) ---
-function renderizarProjetos() {
-    const container = document.getElementById('projetos-grid');
-    if (!container) return;
 
-    let HTMLcontent = '';
-    if (projetos && projetos.length > 0) {
-        projetos.forEach(projeto => {
-            HTMLcontent += `
-            <div class="projeto-card" onclick="window.location.href='./projeto.html?id=${projeto.id}'">
-                <div class="projeto-preview preview-financeai">
-                    <img src="${projeto.imgPreview}" alt="${projeto.nome}" class="projeto-overlay-icon">
-                    <div class="projeto-overlay"></div>
-                </div>
-                <div class="projeto-info">
-                    <div class="projeto-titulo-linha">
-                        <h3>${projeto.nome}</h3>
-                        <a href="./projeto.html?id=${projeto.id}" class="projeto-link-icon" aria-label="Acessar ${projeto.nome}">
-                            <i class="bi bi-arrow-right-circle"></i>
-                        </a>
-                    </div>
-                    <p>${projeto.descricao}</p>
-                    <div class="projeto-tags">
-                        ${projeto.tags.map(tag => `<span>${tag}</span>`).join('')}
-                    </div>
-                </div>
-            </div>`;
-        });
-        container.innerHTML = HTMLcontent;
-    } else {
-        container.innerHTML = `<p>Novos projetos em breve!</p>`;
-    }
-}
 
 // PÁGINA NÃO ENCONTRADA
 
@@ -152,129 +306,3 @@ function paginaNaoEcontrada (){
     if(containerErro) containerErro.classList.add('hidden');
 }
 
-
-
-// RENDERIZAÇÃO DE PÁGINAS DO PROJETO
-function renderizarPaginaProjetos(pagina) {
-    const container = document.getElementById('inicio');
-    const containerErro = document.getElementById('erro-container');
-
-    // se a pagina não for econtrada exibe a página de erro
-    if (!pagina) {
-        paginaNaoEcontrada();
-    return;
-    }
-
-    // Se o projeto existe, garante que o erro fica oculto e o projeto visível
-    if(container) container.classList.add('hidden');
-    if(containerErro) containerErro.classList.add('hidden');
-    document.title = `${pagina.Nome} - Simão.dev`;
-
-    // Mapeamento dos elementos da galeria, funcionalidades e tecnologias
-    const galeriaHTML = pagina.galeriaCarrossel ? pagina.galeriaCarrossel.map(imgSrc => `
-        <img class="slide" src="${imgSrc}" alt="Imagem do projeto ${pagina.Nome}">
-    `).join('') : '';
-
-    const funcionalidadesHTML = pagina.funcionalidadesCarrossel ? pagina.funcionalidadesCarrossel.map(func => `
-        <li><span class="span-verde"><i class="bi bi-check-circle"></i></span> ${func}</li>
-    `).join('') : '';
-
-    const tecnologiasHTML = pagina.tecnologias ? pagina.tecnologias.map(tech => `
-        <li class="detalhe-conteudo">${tech}</li>
-    `).join('') : '';
-
-    container.innerHTML = `
-        <div class="section-projeto">
-            <div class="extras">
-                <div class="ponto"></div>
-                <p class="disponivel">${pagina.status}</p>
-            </div>
-            <div class="nome">
-                <h1 class="titulo-projeto" id="nome_projeto">${pagina.Nome}</h1>
-            </div>
-            <div class="sub-titulo-projeto">
-                <p class="texto-cinza" id="descricao_projeto">${pagina.Descricao}</p>
-                <a id="Link_GitHub" href="${pagina.link}" target="_blank" rel="noopener noreferrer"><button class="button2">GitHub</button></a>
-                <a id="Link_Saiba_Mais" href="${pagina.linkoProjeto}" target="_blank" rel="noopener noreferrer"><button class="button1">Saiba mais</button></a>
-            </div>
-            <div class="carrossel-container">
-                <div class="imagem-projeto" id="carrossel">
-                    ${galeriaHTML}
-                </div>
-                <button class="carrossel-button" id="btn-prev" aria-label="Slide anterior">&#10094;</button>
-                <button class="carrossel-button" id="btn-next" aria-label="Próximo slide">&#10095;</button>
-            </div>
-        </div>
-        <div class="section-informacoes">
-            <div class="container-Informacoes">
-                <div class="Informacoes">
-                    <p class="section-subtitle"><span class="span-verde">// 01 </span> VISÃO GERAL</p>
-                    <div class="texto-sobre">
-                        <p class="texto-cinza" id="visao_geral_projeto">${pagina.descricaoCarrossel}</p>
-                    </div>
-                </div>
-                <div class="funcionalidades">
-                    <p class="section-subtitle"><span class="span-verde">// 02 </span> FUNCIONALIDADES</p>
-                    <ul class="lista-tecnologias" id="funcionalidades_projeto">
-                        ${funcionalidadesHTML}
-                    </ul>
-                </div>
-            </div>
-            <div class="section-tecnologias">
-                <div class="container-detalhes">
-                    <p class="section-subtitle">DETALHES</p>
-                    <div class="detalhes-funcao">
-                        <p class="detalhe-titulo">FUNÇÃO</p>
-                        <p class="detalhe-conteudo">Desenvolvedor Full-Stack</p>
-                    </div>
-                    <div class="detalhes-funcao">
-                        <p class="detalhe-titulo">ANO</p>
-                        <p class="detalhe-conteudo" id="ano_projeto">${pagina.ano}</p>
-                    </div>
-                    <div class="detalhes-funcao">
-                        <p class="detalhe-titulo">STATUS</p>
-                        <p class="detalhe-conteudo" id="status_projeto">${pagina.status}</p>
-                    </div>
-                </div>
-                <div class="container-detalhes">
-                    <p class="section-subtitle">TECNOLOGIAS</p>
-                    <div class="detalhes-funcao">
-                        <ul class="lista-linguagens" id="tecnologias_projeto">
-                            ${tecnologiasHTML}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-
-    // Event Listeners para controle do Carrossel
-    document.getElementById('btn-prev')?.addEventListener('click', () => mudarSlide(-1));
-    document.getElementById('btn-next')?.addEventListener('click', () => mudarSlide(1));
-
-    ajustarFormatosDosCards();
-    mudarSlide(0);
-}
-
-//INICIALIZAÇÃO CONTROLADA
-document.addEventListener("DOMContentLoaded", () => {
-    // Executa a home
-    if (document.getElementById('projetos-grid')) {
-        renderizarProjetos();
-    }
-
-    // Execulta pagina de projetos
-    if (window.location.pathname.includes('projeto.html')) {
-        const urlParams = new URLSearchParams(window.location.search);
-        const projetoId = urlParams.get('id');
-
-
-        //Se o projetoId for invalido ou "NaN" acionará o e rpagina 404
-       const idProjeto = parseInt(projetoId, 10);
-        const dadoProjeto = !isNaN(idProjeto)
-        ? paginaData.find(p => p.id === idProjeto)
-        : undefined;
-        
-        renderizarPaginaProjetos(dadoProjeto);
-    }
-});
