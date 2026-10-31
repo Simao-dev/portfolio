@@ -2,18 +2,16 @@ import { buscarProjetos, buscarProjetoPorId } from './services/projectService.js
 
 
 document.addEventListener("DOMContentLoaded", async () =>{
-
+    const isPaginaProjetos = window.location.pathname.includes("projeto.html");
     const gridProjetos = document.getElementById("projetos-grid");
 
-    if(gridProjetos){
-
+    if(gridProjetos && !isPaginaProjetos){
         const projetos = await buscarProjetos();
-
         renderizarProjetos(projetos);
     }
 
 
-    if(window.location.pathname.includes("projeto.html")){
+    if(isPaginaProjetos){
         const urlParams = new URLSearchParams(window.location.search);
         const projetoId = parseInt(urlParams.get("id"),10);
 
@@ -33,13 +31,16 @@ function renderizarPaginaProjetos(pagina) {
 
     // se a pagina não for econtrada exibe a página de erro
     if (!pagina) {
+        if(container) container.classList.add('hidden');
+        if(containerErro) containerErro.classList.remove('hidden');
+       // document.title = `${pagina.nome} - Simão.dev`;
         paginaNaoEcontrada();
-    return;
+        return;
     }
 
-    // Se o projeto existe, garante que o erro fica oculto e o projeto visível
-    if(container) container.classList.add('hidden');
     if(containerErro) containerErro.classList.add('hidden');
+    if(container) container.classList.remove('hidden');
+
     document.title = `${pagina.nome} - Simão.dev`;
 
     // Mapeamento dos elementos da galeria, funcionalidades e tecnologias
@@ -133,15 +134,14 @@ function renderizarProjetos(listaProjetos) {
     const container = document.getElementById('projetos-grid');
     if (!container) return;
 
-    if(!listaProjetos || listaProjetos.length ===0){
+    if(!Array.isArray(listaProjetos) || listaProjetos.length ===0){
         container.innerHTML = `<p>Nenhum projeto encontrado</p>`
         return;
     }
 
     const htmlCards = listaProjetos.map(projeto =>{
-        const tags = Array.isArray(projeto.tecnologias) ? projeto.tecnologias : [];
         return`
-        <div class="projeto-card" onclick="window.location.href='./projeto.html?id=${projeto.id}'">
+        <div class="projeto-card" onclick="window.location.href='/src/pages/projeto.html?id=${projeto.id}'">
                 <div class="projeto-preview preview-financeai">
                     <img src="${projeto.imgPreview}" alt="${projeto.nome}" class="projeto-overlay-icon">
                     <div class="projeto-overlay"></div>
@@ -159,29 +159,32 @@ function renderizarProjetos(listaProjetos) {
                     </div>
                 </div>
             </div>
-        `}).join("");
+        `
+    }).join("");
 
     container.innerHTML = htmlCards;    
 }
 
 //INICIALIZAÇÃO CONTROLADA
- document.addEventListener("DOMContentLoaded", () => {
+ document.addEventListener("DOMContentLoaded", async () => {
+    const isPaginaProjeto = window.location.pathname.includes("projeto.html");
+    const gridProjetos =  document.getElementById("projetos-grid");
+
      // Executa a home
-     if (document.getElementById('projetos-grid')) {
-         renderizarProjetos();
+     if (gridProjetos && !isPaginaProjeto) {
+        const projetos = await buscarProjetos();
+         renderizarProjetos(projetos);
      }
 
      // Execulta pagina de projetos
-     if (window.location.pathname.includes('projeto.html')) {
-         const urlParams = new URLSearchParams(window.location.search);
-         const projetoId = urlParams.get('id');
-
+     if (isPaginaProjeto) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const projetoId = parseInt(urlParams.get('id'), 10);
 
          //Se o projetoId for invalido ou "NaN" acionará o e rpagina 404
-        const idProjeto = parseInt(projetoId, 10);
-         const dadoProjeto = !isNaN(idProjeto)
-         ? paginaData.find(p => p.id === idProjeto)
-         : undefined;
+        const dadoProjeto = !isNaN(projetoId)
+            ? await buscarProjetoPorId(projetoId)
+            : undefined;
         
          renderizarPaginaProjetos(dadoProjeto);
      }
